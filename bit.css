@@ -13,6 +13,7 @@ nav {
   justify-content: space-between;
   padding: 15px 50px 15px 50px;
   color: #2b2b2b;
+  
 }
 span {
   font-size: 15px;
@@ -29,7 +30,7 @@ a {
   font-weight: bold;
   line-height: 0.9;
 }
-.menu {
+#menu {
   display: flex;
   gap: 20px;
 }
@@ -207,6 +208,7 @@ ul {
   display: flex;
   gap: 30px;
   margin: 40px 100px;
+  flex: wrap;
 }
 .menu-btn {
   display: none;
@@ -440,7 +442,15 @@ textarea {
   text-align: center;
 }
 .past-events, .ongoing-events {
-  margin-bottom: 50px;
+  margin: 30px;
+}
+.program-page {
+  background: linear-gradient(
+    to bottom,
+    #f2f4f6 0%,
+    #ffffff 60%,
+    #f9fafb 100%
+  );
 }
 @media (max-width: 1024px) {
   .head {
@@ -450,25 +460,28 @@ textarea {
     height: 400px;
   }
   .main-text {
-    padding: 35px;
+    padding: 30px;
     align-items: center;
   }
   .section2 {
     height: 300px;
   }
   .img2 {
-    width: 400px;
+    width: 100%;
   }
   .team {
-    padding: 10px 65px;
-   
+ padding: 0;
+  }
+  .section3 {
+    padding: 15px;
+  }
+  .events-grid {
+    flex-wrap: wrap;
   }
   .outreach {
-    width: 300px;
+    width: 100%;
   }
-  .event-card {
-    width: 300px;
-  }
+  
   .about-img {
     width: 450px;
   }
@@ -523,7 +536,8 @@ textarea {
   display: flex;
  background-color: #faf9f6;
   flex-direction: column;
-  margin-bottom: 330px;
+  margin-bottom: 300px;
+  gap: 0;
  
 }
 .mission, .wwa, .wwd {
@@ -532,7 +546,9 @@ textarea {
  border-radius: 10px;
 }
 .team {
-  display: grid;
+  flex-wrap: wrap;
+ padding: 30px;
+ margin: 0 20px;
 }
 .team-card2, .team-card3 {
   display: none;
@@ -556,7 +572,6 @@ textarea {
   margin-top: 25px;
 }
 .events-grid {
-  display: grid;
   margin: 20px 45px 20px 45px;
 }
 .menu {
@@ -611,18 +626,31 @@ textarea {
 .socials {
   display: flex;
 }
-.menu {
+#menu {
   flex-direction: column;
   position: absolute;
-  top: 10%;
-  z-index: 9999;
-  background-color:#f2f4f6;
+  top:  8%;
+  z-index: 1000;
+  background:#ffffff;
   padding: 30px;
-  right: 3%;
- /* backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform: translateY(-20px) scale(0.95);*/
+  right: 0;
+  left: 50%;
+ transform: translateY(-20px);
+ opacity: 0;
+ pointer-events: none;
+ transition: transform 0.3s ease, opacity 0.3s ease;
 }
+#menu.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#burger {
+  transition: 
+    opacity 0.15s ease,
+    transform 0.25s ease;
+}
+
 .about-main {
   flex-direction: column;
   width: 100%;
@@ -687,5 +715,8 @@ nav {
 }
 .cord-btn {
   margin-left: 70px;
+}
+.past-events, .ongoing-events {
+  margin: 0;
 }
 }
