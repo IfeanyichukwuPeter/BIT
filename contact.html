@@ -34,10 +34,10 @@
       <p class="helper-text">
         Questions will be visible to everyone once answered.
       </p>
-      <form action="" class="question-form">
+      <form action="" class="question-form" id="questionForm">
         <label for="Name">
           Name(Optional)
-          <input type="text" name="name" placeholder="Your Name" />
+          <input type="text" name="name" placeholder="Your Name" id="name"/>
         </label>
         <label for="Question">
           Question
@@ -49,6 +49,8 @@
           ></textarea>
         </label>
         <button type="submit" class="submit-btn">Submit Question</button>
+
+        <p id="formMessage"></p>
       </form>
     </section>
     </main>
@@ -78,6 +80,10 @@
          
         </article>
       </div>
+    </section>
+    <section class="answered-section">
+      <h2>Answered Questions</h2>
+      <div id="answeredQuestions"></div>
     </section>
     <section class="contact-cords">
       <h2>Reach Our Coordinators</h2>
