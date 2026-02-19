@@ -40,18 +40,13 @@ function initMenu() {
     menuIcon.style.transform = isOpen ? "rotate(90deg)" : "rotate(0deg)";
   });
 }
+
 // QUESTIONS ARRAY
 
-let questions = [
-  {
-    id: 1,
-    name: "Sarah",
-    question: "What age range does BIT focus on?",
-    answer: "From ages 5–15 for now.",
-    status: "answered"
-  },
-  
-];
+let questions = JSON.parse(localStorage.getItem("questions")) || [];
+function saveToStorage() {
+  localStorage.setItem("questions", JSON.stringify("questions"))
+}
 
 // PUBLIC CONTACT PAGE
 
@@ -76,6 +71,7 @@ if (questionForm) {
     };
 
     questions.push(newQuestion);
+    saveToStorage();
 
     questionForm.reset();
 
@@ -183,6 +179,7 @@ function attachReplyHandlers() {
       const q = questions.find(item => item.id == id);
       q.answer = reply;
       q.status = "answered";
+      saveToStorage();
 
       renderAdminQuestions(); 
       renderAnswered();       
@@ -202,6 +199,7 @@ function attachDeleteHandlers() {
 
       // Remove question from array
       questions = questions.filter(q => q.id != id);
+      saveToStorage();
 
       renderAdminQuestions();
       renderAnswered();
