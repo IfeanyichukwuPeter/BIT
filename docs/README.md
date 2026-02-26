@@ -31,6 +31,7 @@ BIT Children Ministry is a Bible-based ministry focused on guiding children and 
 ## 🛠️ Technology Stack
 
 ### Frontend
+
 - **HTML5** - Semantic markup
 - **CSS3** - Custom styling with responsive design
 - **Vanilla JavaScript** - Client-side interactivity
@@ -38,12 +39,14 @@ BIT Children Ministry is a Bible-based ministry focused on guiding children and 
 - **Google Fonts** - Typography (Source Sans 3, Poppins, Inter)
 
 ### Backend
+
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
 - **File-based Storage** - JSON data persistence
 - **Token-based Auth** - Secure admin authentication
 
 ### Development & Testing
+
 - **Jest** - Testing framework
 - **Supertest** - HTTP testing
 - **pnpm** - Package manager
@@ -63,12 +66,14 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd BIT
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    # or
@@ -76,11 +81,13 @@ Before you begin, ensure you have the following installed:
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Edit `.env` to customize:
+
    ```env
    PORT=3000
    ADMIN_USERNAME=admin
@@ -89,6 +96,7 @@ Before you begin, ensure you have the following installed:
    ```
 
 4. **Start the development server**
+
    ```bash
    pnpm dev
    # or
@@ -96,7 +104,7 @@ Before you begin, ensure you have the following installed:
    ```
 
 5. **Open your browser**
-   
+
    Navigate to `http://localhost:3000`
 
 ---
@@ -160,6 +168,7 @@ BIT/
 ## 🔌 API Documentation
 
 ### Base URL
+
 ```
 http://localhost:3000/api
 ```
@@ -167,6 +176,7 @@ http://localhost:3000/api
 ### Authentication
 
 #### Login
+
 ```http
 POST /api/admin/login
 Content-Type: application/json
@@ -178,6 +188,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "token": "abc123...",
@@ -190,6 +201,7 @@ Content-Type: application/json
 ### Questions
 
 #### Get All Questions
+
 ```http
 GET /api/questions
 GET /api/questions?status=answered
@@ -197,6 +209,7 @@ GET /api/questions?status=pending
 ```
 
 #### Create Question (Public)
+
 ```http
 POST /api/questions
 Content-Type: application/json
@@ -208,6 +221,7 @@ Content-Type: application/json
 ```
 
 #### Update Question (Admin Only)
+
 ```http
 PATCH /api/questions/:id
 Authorization: Bearer <token>
@@ -219,6 +233,7 @@ Content-Type: application/json
 ```
 
 #### Delete Question (Admin Only)
+
 ```http
 DELETE /api/questions/:id
 Authorization: Bearer <token>
@@ -254,13 +269,13 @@ The project maintains **97.89%** test coverage:
 
 ## 📜 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm start` | Start production server |
-| `pnpm dev` | Start development server with hot-reload |
-| `pnpm test` | Run test suite |
-| `pnpm run test:watch` | Run tests in watch mode |
-| `pnpm run test:coverage` | Run tests with coverage report |
+| Command                  | Description                              |
+| ------------------------ | ---------------------------------------- |
+| `pnpm start`             | Start production server                  |
+| `pnpm dev`               | Start development server with hot-reload |
+| `pnpm test`              | Run test suite                           |
+| `pnpm run test:watch`    | Run tests in watch mode                  |
+| `pnpm run test:coverage` | Run tests with coverage report           |
 
 ---
 
@@ -299,6 +314,7 @@ This is the official website for BIT Children Ministry. It helps:
 ### Admin Access
 
 Ministry leaders can log into the admin dashboard to:
+
 - View all submitted questions
 - Answer questions (answers appear publicly on the Contact page)
 - Delete inappropriate or resolved questions
@@ -349,12 +365,14 @@ We welcome contributions! Here's how you can help:
 ### Common Issues
 
 **Port already in use**
+
 ```bash
 # Change PORT in .env file
 PORT=3001
 ```
 
 **Tests failing**
+
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules pnpm-lock.yaml
@@ -362,6 +380,7 @@ pnpm install
 ```
 
 **Questions not saving**
+
 ```bash
 # Ensure data directory exists
 mkdir -p data
@@ -399,6 +418,6 @@ This project is proprietary software for BIT Children Ministry.
 
 **Built with ❤️ for BIT Children Ministry**
 
-*Raising a generation that knows Christ, lives with purpose, and reflects God's love*
+_Raising a generation that knows Christ, lives with purpose, and reflects God's love_
 
 </div>

@@ -24,6 +24,7 @@ public/
 **Purpose:** Everything the browser loads and displays to users.
 
 **How it works:**
+
 - Server serves this folder as static files
 - `bit.js` dynamically loads nav/footer components
 - All pages link to shared CSS and JS
@@ -55,6 +56,7 @@ server/
 **Purpose:** API backend, authentication, data management.
 
 **How it works:**
+
 - `server.js` starts the Express server
 - Routes define API endpoints
 - Controllers handle business logic
@@ -78,6 +80,7 @@ tests/
 **Purpose:** Ensure code quality and catch bugs.
 
 **How to run:**
+
 ```bash
 pnpm test              # Run all tests
 pnpm run test:watch    # Watch mode
@@ -100,6 +103,7 @@ data/
 **Purpose:** Simple file-based database for questions.
 
 **Structure:**
+
 ```json
 [
   {
@@ -113,6 +117,7 @@ data/
 ```
 
 **Notes:**
+
 - In production, consider migrating to a real database (PostgreSQL, MongoDB)
 - Regular backups recommended
 - IDs are Unix timestamps
@@ -307,6 +312,7 @@ Currently, no build process is required:
 - No bundling required
 
 **For production optimization (future):**
+
 - Minify CSS/JS
 - Image optimization
 - Add CDN for assets

@@ -62,13 +62,13 @@ BIT/
 
 ## 📜 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm start` | Start production server |
-| `pnpm dev` | Start development server with hot-reload |
-| `pnpm test` | Run test suite |
-| `pnpm run test:watch` | Run tests in watch mode |
-| `pnpm run test:coverage` | Run tests with coverage report |
+| Command                  | Description                              |
+| ------------------------ | ---------------------------------------- |
+| `pnpm start`             | Start production server                  |
+| `pnpm dev`               | Start development server with hot-reload |
+| `pnpm test`              | Run test suite                           |
+| `pnpm run test:watch`    | Run tests in watch mode                  |
+| `pnpm run test:coverage` | Run tests with coverage report           |
 
 ---
 
@@ -111,7 +111,7 @@ This project is proprietary software for BIT Children Ministry.
 
 **Built with ❤️ for BIT Children Ministry**
 
-*Raising a generation that knows Christ, lives with purpose, and reflects God's love*
+_Raising a generation that knows Christ, lives with purpose, and reflects God's love_
 
 For detailed documentation, visit the [`docs/`](docs/) folder.
 
