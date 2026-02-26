@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": 1709000000000,
+    "name": "Ada",
+    "question": "What time do programs start on Sundays?",
+    "answer": "We start at 9:00 AM after first service. Check the events page for updates.",
+    "status": "answered"
+  },
+  {
+    "id": 1709000005000,
+    "name": "Anonymous",
+    "question": "Is there a registration fee?",
+    "answer": "",
+    "status": "pending"
+  },
+  {
+    "id": 1709000010000,
+    "name": "Chidi",
+    "question": "What ages can join?",
+    "answer": "We focus on ages 5-15, but everyone is welcome at events.",
+    "status": "answered"
+  },
+  {
+    "id": 1772088713045,
+    "name": "Micheal",
+    "question": "How can I be a better soul?",
+    "answer": "Serving the lord with all my heart",
+    "status": "answered"
+  }
+]

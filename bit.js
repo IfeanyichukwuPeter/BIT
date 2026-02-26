@@ -43,9 +43,58 @@ function initMenu() {
 
 // QUESTIONS ARRAY
 
-let questions = JSON.parse(localStorage.getItem("questions")) || [];
-function saveToStorage() {
-  localStorage.setItem("questions", JSON.stringify("questions"))
+let questions = [];
+
+async function loadQuestions() {
+  const response = await fetch("/api/questions");
+
+  if (!response.ok) {
+    throw new Error("Failed to load questions.");
+  }
+
+  questions = await response.json();
+}
+
+async function createQuestion(payload) {
+  const response = await fetch("/api/questions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to submit question.");
+  }
+
+  return response.json();
+}
+
+async function updateQuestion(id, payload) {
+  const response = await fetch(`/api/questions/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update question.");
+  }
+
+  return response.json();
+}
+
+async function removeQuestion(id) {
+  const response = await fetch(`/api/questions/${id}`, {
+    method: "DELETE"
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete question.");
+  }
 }
 
 // PUBLIC CONTACT PAGE
@@ -54,7 +103,7 @@ const questionForm = document.getElementById("questionForm");
 const answeredContainer = document.getElementById("answeredQuestions");
 
 if (questionForm) {
-  questionForm.addEventListener("submit", (e) => {
+  questionForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const name = document.getElementById("name").value.trim() || "Anonymous";
@@ -62,23 +111,22 @@ if (questionForm) {
 
     if (!questionText) return alert("Please enter a question.");
 
-    const newQuestion = {
-      id: Date.now(), 
-      name,
-      question: questionText,
-      answer: "",
-      status: "pending"
-    };
+    try {
+      const newQuestion = await createQuestion({
+        name,
+        question: questionText
+      });
 
-    questions.push(newQuestion);
-    saveToStorage();
+      questions.push(newQuestion);
+      questionForm.reset();
 
-    questionForm.reset();
+      alert("Your question has been submitted! Answers will appear here once provided.");
 
-    alert("Your question has been submitted! Answers will appear here once provided.");
-
-    renderAnswered();      
-    renderAdminQuestions();  
+      renderAnswered();
+      renderAdminQuestions();
+    } catch (error) {
+      alert("Unable to submit your question right now.");
+    }
   });
 }
 
@@ -176,13 +224,17 @@ function attachReplyHandlers() {
       const reply = textarea.value.trim();
       if (!reply) return alert("Type a reply before sending.");
 
-      const q = questions.find(item => item.id == id);
-      q.answer = reply;
-      q.status = "answered";
-      saveToStorage();
-
-      renderAdminQuestions(); 
-      renderAnswered();       
+      updateQuestion(id, { answer: reply })
+        .then((updated) => {
+          questions = questions.map((item) =>
+            item.id == updated.id ? updated : item
+          );
+          renderAdminQuestions();
+          renderAnswered();
+        })
+        .catch(() => {
+          alert("Unable to send reply right now.");
+        });
     });
   });
 }
@@ -197,14 +249,24 @@ function attachDeleteHandlers() {
       const confirmDelete = confirm("Are you sure you want to delete this question?");
       if (!confirmDelete) return;
 
-      // Remove question from array
-      questions = questions.filter(q => q.id != id);
-      saveToStorage();
-
-      renderAdminQuestions();
-      renderAnswered();
+      removeQuestion(id)
+        .then(() => {
+          questions = questions.filter(q => q.id != id);
+          renderAdminQuestions();
+          renderAnswered();
+        })
+        .catch(() => {
+          alert("Unable to delete question right now.");
+        });
     });
   });
 }
 
-renderAnswered();
+loadQuestions()
+  .then(() => {
+    renderAnswered();
+    renderAdminQuestions();
+  })
+  .catch(() => {
+    renderAnswered();
+  });
