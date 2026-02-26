@@ -44,6 +44,7 @@ function initMenu() {
 // QUESTIONS ARRAY
 
 let questions = [];
+let adminToken = localStorage.getItem("adminToken") || null;
 
 async function loadQuestions() {
   const response = await fetch("/api/questions");
@@ -53,6 +54,31 @@ async function loadQuestions() {
   }
 
   questions = await response.json();
+}
+
+async function adminLogin(username, password) {
+  const response = await fetch("/api/admin/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, password })
+  });
+
+  if (!response.ok) {
+    throw new Error("Invalid username or password.");
+  }
+
+  const data = await response.json();
+  adminToken = data.token;
+  localStorage.setItem("adminToken", adminToken);
+
+  return data;
+}
+
+function adminLogout() {
+  adminToken = null;
+  localStorage.removeItem("adminToken");
 }
 
 async function createQuestion(payload) {
@@ -75,7 +101,8 @@ async function updateQuestion(id, payload) {
   const response = await fetch(`/api/questions/${id}`, {
     method: "PATCH",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${adminToken}`
     },
     body: JSON.stringify(payload)
   });
@@ -89,7 +116,10 @@ async function updateQuestion(id, payload) {
 
 async function removeQuestion(id) {
   const response = await fetch(`/api/questions/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${adminToken}`
+    }
   });
 
   if (!response.ok) {
@@ -159,16 +189,23 @@ const loginBtn = document.getElementById("adminLoginBtn");
 const loginMessage = document.getElementById("loginMessage");
 
 if (loginBtn) {
-  loginBtn.addEventListener("click", () => {
-    const input = document.getElementById("adminPassword").value;
+  loginBtn.addEventListener("click", async () => {
+    const username = document.getElementById("adminUsername")?.value || "admin";
+    const password = document.getElementById("adminPassword").value;
 
-    if (input === ADMIN_PASSWORD) {
+    if (!password) {
+      loginMessage.textContent = "Please enter a password.";
+      return;
+    }
+
+    try {
+      await adminLogin(username, password);
       loginContainer.style.display = "none";
       adminSection.style.display = "block";
-
-      renderAdminQuestions(); 
-    } else {
-      loginMessage.textContent = "Incorrect password. Try again.";
+      loginMessage.textContent = "";
+      renderAdminQuestions();
+    } catch (error) {
+      loginMessage.textContent = "Incorrect credentials. Try again.";
     }
   });
 }
@@ -177,6 +214,20 @@ if (loginContainer) {
   const pwdInput = document.getElementById("adminPassword");
   pwdInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") loginBtn.click();
+  });
+}
+
+// Logout handler
+const logoutLink = document.querySelector(".admin-nav a:nth-child(4)");
+if (logoutLink) {
+  logoutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    adminLogout();
+    loginContainer.style.display = "block";
+    adminSection.style.display = "none";
+    document.getElementById("adminUsername").value = "";
+    document.getElementById("adminPassword").value = "";
+    loginMessage.textContent = "";
   });
 }
 

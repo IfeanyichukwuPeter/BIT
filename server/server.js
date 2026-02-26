@@ -1,11 +1,38 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const { randomBytes } = require("crypto");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const DATA_FILE = path.join(__dirname, "..", "data", "questions.json");
+
+// Admin credentials (in production, use environment variables or a database)
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "BITadmin123";
+
+// Token storage (in production, use a database or Redis)
+const tokens = new Map();
+
+function generateToken() {
+  return randomBytes(16).toString("hex");
+}
+
+function verifyToken(token) {
+  return tokens.has(token);
+}
+
+function authMiddleware(req, res, next) {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token || !verifyToken(token)) {
+    return res.status(401).json({ error: "Unauthorized. Invalid or missing token." });
+  }
+
+  next();
+}
 
 app.use(express.json());
 
@@ -21,6 +48,19 @@ function writeQuestions(questions) {
   fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
   fs.writeFileSync(DATA_FILE, JSON.stringify(questions, null, 2));
 }
+
+app.post("/api/admin/login", (req, res) => {
+  const { username, password } = req.body;
+
+  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    const token = generateToken();
+    tokens.set(token, { username, createdAt: Date.now() });
+
+    return res.json({ token, message: "Login successful." });
+  }
+
+  res.status(401).json({ error: "Invalid username or password." });
+});
 
 app.get("/api/questions", (req, res) => {
   const status = req.query.status;
@@ -57,7 +97,7 @@ app.post("/api/questions", (req, res) => {
   res.status(201).json(newQuestion);
 });
 
-app.patch("/api/questions/:id", (req, res) => {
+app.patch("/api/questions/:id", authMiddleware, (req, res) => {
   const id = Number(req.params.id);
   const questions = readQuestions();
   const q = questions.find((item) => item.id === id);
