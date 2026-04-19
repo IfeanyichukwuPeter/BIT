@@ -25,6 +25,7 @@
   <body>
     <div id="adminLogin">
       <h2>Admin Login</h2>
+      <input type="text" id="adminUsername" placeholder="Enter Username">
       <input type="password" id="adminPassword" placeholder="Enter password" />
       <button id="adminLoginBtn">Enter</button>
       <p id="loginMessage" style="color: red"></p>
@@ -35,14 +36,14 @@
         <aside class="side-bar">
           <h2 class="admin-logo">BIT Admin</h2>
           <nav class="admin-nav">
-            <a href="" class="active">Dashboard</a>
-            <a href="">Questions</a>
-            <a href="">Events</a>
+            <a href="#mainPanel" class="active">Dashboard</a>
+            <a href="#adminQuestions">Questions</a>
+          
+            <a href="#eventSection">Events</a>
             <a href="">Logout</a>
-            <a href=""></a>
           </nav>
         </aside>
-        <main class="main-panel">
+        <main class="main-panel" id="mainPanel">
           <header class="top-bar">
             <h1>Dashboard</h1>
             <div class="admin-user">Admin</div>
@@ -60,12 +61,39 @@
               </div>
               <div class="card">
                 <h3>Total Events</h3>
+                <p></p>
               </div>
             </div>
           </section>
           <section class="admin-questions">
             <h2>Questions</h2>
             <div id="adminQuestions"></div>
+          </section>
+          <section class="events-section" id="eventSection">
+            <section class="event-form">
+              <h2>Create/ Edit events</h2>
+              <form action="" id="eventForm">
+                <input type="file" id="event-image" accept="image/*" />
+                <input
+                  type="text"
+                  name="event-title"
+                  id="event-title"
+                  required
+                  placeholder="Event title"
+                />
+                <input type="date" id="date" required />
+                <textarea
+                  name="description"
+                  id="description"
+                  placeholder="Event description"
+                ></textarea>
+                <button type="submit" class="form-btn">Add Event</button>
+              </form>
+            </section>
+            <section>
+              <h2>All Events</h2>
+              <div id="adminEvents"></div>
+            </section>
           </section>
         </main>
       </section>

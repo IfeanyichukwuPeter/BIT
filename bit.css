@@ -452,6 +452,69 @@ textarea {
     #f9fafb 100%
   );
 }
+.main-panel {
+  padding: 20px;
+}
+#adminLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
+  gap: 20px;
+  background-color: #f7f9fb;
+  padding: 20px;
+  align-items: center;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 10px;
+}
+#adminLoginBtn {
+  width: 120px;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #003b66;
+  border: none;
+  border-radius: 5px;
+}
+.card {
+  background-color: #fffefb;
+  border-color: #e5e7eb;
+  border-width: 2px;
+   border-style: solid;
+   border-radius: 7px;
+  margin: 20px;
+  padding: 10px;
+  width: 300px;
+ 
+}
+.top-bar {
+  gap: 10px;
+  margin: 20px;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+}
+.admin-questions {
+  margin-bottom: 30px;
+}
+ #eventForm {
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px;
+}
+.form-btn {
+   width: 120px;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #003b66;
+  border: none;
+  border-radius: 5px;
+}
+
 @media (max-width: 1024px) {
   .head {
     font-size: 35px;
