@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIT- Admin Dashboard</title>
+    <link rel="stylesheet" href="bit.css" />
+    <script
+      src="https://kit.fontawesome.com/ba0a924bb3.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="adminLogin">
+      <h2>Admin Login</h2>
+      <input type="password" id="adminPassword" placeholder="Enter password" />
+      <button id="adminLoginBtn">Enter</button>
+      <p id="loginMessage" style="color: red"></p>
+    </div>
+
+    <section id="adminSection" style="display: none">
+      <section class="admin-layout">
+        <aside class="side-bar">
+          <h2 class="admin-logo">BIT Admin</h2>
+          <nav class="admin-nav">
+            <a href="#mainPanel" class="active">Dashboard</a>
+            <a href="#adminQuestions">Questions</a>
+          
+            <a href="#eventSection">Events</a>
+            <a href="">Logout</a>
+          </nav>
+        </aside>
+        <main class="main-panel" id="mainPanel">
+          <header class="top-bar">
+            <h1>Dashboard</h1>
+            <div class="admin-user">Admin</div>
+          </header>
+
+          <section class="content">
+            <div class="stats">
+              <div class="card">
+                <h3>Pending Questions</h3>
+                <p>0</p>
+              </div>
+              <div class="card">
+                <h3>Answered Questions</h3>
+                <p>3</p>
+              </div>
+              <div class="card">
+                <h3>Total Events</h3>
+                <p></p>
+              </div>
+            </div>
+          </section>
+          <section class="admin-questions">
+            <h2>Questions</h2>
+            <div id="adminQuestions"></div>
+          </section>
+          <section class="events-section" id="eventSection">
+            <section class="event-form">
+              <h2>Create/ Edit events</h2>
+              <form action="" id="eventForm">
+                <input type="file" id="event-image" accept="image/*" />
+                <input
+                  type="text"
+                  name="event-title"
+                  id="event-title"
+                  required
+                  placeholder="Event title"
+                />
+                <input type="date" id="date" required />
+                <textarea
+                  name="description"
+                  id="description"
+                  placeholder="Event description"
+                ></textarea>
+                <button type="submit" class="form-btn">Add Event</button>
+              </form>
+            </section>
+            <section>
+              <h2>All Events</h2>
+              <div id="adminEvents"></div>
+            </section>
+          </section>
+        </main>
+      </section>
+    </section>
+
+    <script src="bit.js"></script>
+  </body>
+</html>
