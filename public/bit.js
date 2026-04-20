@@ -321,3 +321,139 @@ loadQuestions()
   .catch(() => {
     renderAnswered();
   });
+
+  //EVENTS
+
+  const eventForm = document.getElementById("eventForm");
+const adminEventsContainer = document.getElementById("adminEvents");
+
+const eventTitleInput = document.getElementById("eventTitle");
+const eventDateInput = document.getElementById("eventDate");
+const eventDescriptionInput = document.getElementById("eventDescription");
+const eventImageInput = document.getElementById("eventImage");
+
+let events = [];
+let editingEventId = null;
+
+async function loadEvents() {
+  try {
+    const res = await fetch("/api/events");
+
+    if (!res.ok) throw new Error("Failed to fetch events");
+
+    events = await res.json();
+    renderEvents();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function renderEvents() {
+  if (!adminEventsContainer) return;
+
+  adminEventsContainer.innerHTML = "";
+
+  if (events.length === 0) {
+    adminEventsContainer.innerHTML = "<p>No events yet</p>";
+    return;
+  }
+
+  events.forEach(ev => {
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+      <h3>${ev.title}</h3>
+      <p>${ev.date || ""}</p>
+      <button data-id="${ev.id}" class="edit-event">Edit</button>
+      <button data-id="${ev.id}" class="delete-event">Delete</button>
+      <hr>
+    `;
+
+    adminEventsContainer.appendChild(div);
+  });
+
+  attachEventActions();
+}
+
+if (eventForm) {
+  eventForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", eventTitleInput.value);
+    formData.append("date", eventDateInput.value);
+    formData.append("description", eventDescriptionInput.value);
+
+    if (eventImageInput.files[0]) {
+      formData.append("image", eventImageInput.files[0]);
+    }
+
+    let url = "/api/events";
+    let method = "POST";
+
+    if (editingEventId) {
+      url = `/api/events/${editingEventId}`;
+      method = "PATCH";
+    }
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${adminToken}`
+        },
+        body: formData
+      });
+
+      if (!res.ok) throw new Error("Failed to save event");
+
+      editingEventId = null;
+      eventForm.reset();
+
+      await loadEvents();
+    } catch (err) {
+      alert("Error saving event");
+    }
+  });
+}
+
+function attachEventActions() {
+  document.querySelectorAll(".edit-event").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const ev = events.find(e => e.id == id);
+
+      editingEventId = id;
+
+      eventTitleInput.value = ev.title || "";
+      eventDateInput.value = ev.date || "";
+      eventDescriptionInput.value = ev.description || "";
+    });
+  });
+
+  document.querySelectorAll(".delete-event").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+
+      const confirmDelete = confirm("Delete this event?");
+      if (!confirmDelete) return;
+
+      try {
+        const res = await fetch(`/api/events/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${adminToken}`
+          }
+        });
+
+        if (!res.ok) throw new Error();
+
+        await loadEvents();
+      } catch {
+        alert("Failed to delete event");
+      }
+    });
+  });
+}
+
+loadEvents();
