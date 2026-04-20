@@ -32,8 +32,8 @@ function initMenu() {
 
     setTimeout(() => {
       menuIcon.src = isOpen
-        ? "/bitimg/icon-close.svg"
-        : "/bitimg/icon-hamburger.svg";
+        ? "/public/bitimg/icon-close.svg"
+        : "/public/bitimg/icon-hamburger.svg";
 
       menuIcon.style.opacity = "1";
     }, 150);
@@ -150,7 +150,7 @@ if (questionForm) {
       questions.push(newQuestion);
       questionForm.reset();
 
-      alert("Your question has been submitted! Answers will appear here once provided.");
+      alert("Your question has been submitted! Answers will appear in the 'Answered Questions' section once answered.");
 
       renderAnswered();
       renderAdminQuestions();

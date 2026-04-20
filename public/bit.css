@@ -347,7 +347,7 @@ footer {
   background-color: #faf9f6;
   color: #2b2b2b;
 }
-.qa-list {
+.qa-list, .answered-section {
   margin: 30px;
 }
 .answered {
@@ -451,6 +451,11 @@ textarea {
     #ffffff 60%,
     #f9fafb 100%
   );
+  padding-top: 20px
+}
+.programHeader {
+  margin-left: 12px;
+  margin-bottom: 15px;
 }
 .main-panel {
   padding: 20px;
