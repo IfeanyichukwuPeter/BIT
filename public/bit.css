@@ -13,7 +13,6 @@ nav {
   justify-content: space-between;
   padding: 15px 50px 15px 50px;
   color: #2b2b2b;
-  
 }
 span {
   font-size: 15px;
@@ -49,6 +48,14 @@ a {
 .img1 {
   width: 100%;
   height: 100%;
+  transform: scale(0.9);
+  animation: zoomIn 1.2s ease forwards;
+}
+
+@keyframes zoomIn {
+  to {
+    transform: scale(1);
+  }
 }
 .img3 {
   display: none;
@@ -84,6 +91,16 @@ a {
   line-height: 1.2;
   width: 50%;
   text-align: start;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeSlideIn 1s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 .main-text::after {
   content: "";
@@ -100,7 +117,7 @@ a {
   border-radius: 5px;
   color: #ffffff;
   font-size: 11px;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: "Source Sans 3", sans-serif;
   margin-top: 30px;
   transition: 0.5s ease;
 }
@@ -109,6 +126,7 @@ a {
   color: #0f2a44;
   cursor: pointer;
 }
+
 .section2 {
   background-color: #faf9f6;
   color: #2b2b2b;
@@ -148,7 +166,6 @@ a {
   display: none;
   width: 100px;
   height: 40px;
-  
 }
 .team {
   display: flex;
@@ -178,12 +195,15 @@ a {
 .responsibility {
   font-size: 12px;
 }
-.mission, .wwa, .wwd{
+.mission,
+.wwa,
+.wwd {
   margin: 40px 100px;
   padding: 20px 50px 45px 50px;
   background-color: #f2f4f6;
 }
-.mis-head, .wwa-head {
+.mis-head,
+.wwa-head {
   color: #0f2a44;
   margin: 20px;
 }
@@ -217,7 +237,8 @@ ul {
   width: 150px;
   margin-left: 70px;
 }
-.event-card, .event-card2 {
+.event-card,
+.event-card2 {
   background: white;
   border-radius: 15px;
   width: 350px;
@@ -226,7 +247,7 @@ ul {
   transition: transform 0.3s ease;
 }
 .event-card:hover {
-   transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 .event-card2:hover {
   transform: translateY(-10px);
@@ -263,25 +284,28 @@ ul {
   color: #0f2a44;
   margin: 15px;
 }
-.contact-btn,.cord-btn,.submit-btn {
+.contact-btn,
+.cord-btn,
+.submit-btn {
   padding: 10px 30px;
   border: 1.5px solid #ffffff;
   background: #004e89;
   border-radius: 5px;
   color: #ffffff;
   font-size: 11px;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: "Source Sans 3", sans-serif;
   margin-top: 15px;
   transition: 0.5s ease;
 }
-.contact-btn,.cord-btn,.submit-btn:hover {
+.contact-btn,
+.cord-btn,
+.submit-btn:hover {
   background-color: #003b66;
   transform: translateY(-5px);
 }
 hr {
   margin: auto;
   width: 90%;
- 
 }
 footer {
   margin-top: 50px;
@@ -291,7 +315,7 @@ footer {
 .footer-sect a {
   color: #ffffff;
 }
-.footer-sect a :hover{
+.footer-sect a :hover {
   text-decoration: underline;
 }
 .bit-logo {
@@ -320,7 +344,7 @@ footer {
   gap: 8px;
   margin: 5px;
 }
-.contact-cords  {
+.contact-cords {
   padding: 10px 100px;
 }
 .footer-sect h2 {
@@ -347,13 +371,13 @@ footer {
   background-color: #faf9f6;
   color: #2b2b2b;
 }
-.qa-list, .answered-section {
+.qa-list,
+.answered-section {
   margin: 30px;
 }
 .answered {
   display: flex;
   justify-content: center;
- 
 }
 .question {
   margin-bottom: 15px;
@@ -362,7 +386,8 @@ footer {
   padding: 15px 70px;
   background-color: #f2f4f6;
 }
-.contact-page, h1 {
+.contact-page,
+h1 {
   color: #0f2a44;
 }
 .paq {
@@ -374,12 +399,7 @@ footer {
   font-style: italic;
 }
 main {
-  background: linear-gradient(
-    to bottom,
-    #f2f4f6 0%,
-    #f7f9fb 50%,
-    #ffffff 100%
-  );
+  background: linear-gradient(to bottom, #f2f4f6 0%, #f7f9fb 50%, #ffffff 100%);
 }
 header {
   margin-bottom: 30px;
@@ -392,16 +412,16 @@ label {
 input {
   width: 300px;
   height: 35px;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: "Source Sans 3", sans-serif;
 }
 textarea {
   width: 300px;
   height: 100px;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: "Source Sans 3", sans-serif;
 }
 .about-main {
   display: flex;
-   background-color: #faf9f6;
+  background-color: #faf9f6;
   color: #2b2b2b;
   gap: 30px;
 }
@@ -417,21 +437,22 @@ textarea {
   display: flex;
   width: 100%;
   gap: 20px;
- justify-content: space-between;
- margin: auto;
- padding: 30px 100px;
+  justify-content: space-between;
+  margin: auto;
+  padding: 30px 100px;
 }
-.mis, .vis {
+.mis,
+.vis {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-   background-color: #faf9f6;
+  background-color: #faf9f6;
   color: #2b2b2b;
   padding: 15px 30px;
 }
 .misvis-header {
-   padding: 20px;
+  padding: 20px;
   padding-left: 100px;
 }
 .vis {
@@ -441,17 +462,13 @@ textarea {
   margin: auto;
   text-align: center;
 }
-.past-events, .ongoing-events {
+.past-events,
+.ongoing-events {
   margin: 30px;
 }
 .program-page {
-  background: linear-gradient(
-    to bottom,
-    #f2f4f6 0%,
-    #ffffff 60%,
-    #f9fafb 100%
-  );
-  padding-top: 20px
+  background: linear-gradient(to bottom, #f2f4f6 0%, #ffffff 60%, #f9fafb 100%);
+  padding-top: 20px;
 }
 .programHeader {
   margin-left: 12px;
@@ -485,12 +502,11 @@ textarea {
   background-color: #fffefb;
   border-color: #e5e7eb;
   border-width: 2px;
-   border-style: solid;
-   border-radius: 7px;
+  border-style: solid;
+  border-radius: 7px;
   margin: 20px;
   padding: 10px;
   width: 300px;
- 
 }
 .top-bar {
   gap: 10px;
@@ -503,7 +519,7 @@ textarea {
 .admin-questions {
   margin-bottom: 30px;
 }
- #eventForm {
+#eventForm {
   max-width: 500px;
   height: auto;
   display: flex;
@@ -512,7 +528,7 @@ textarea {
   margin: 20px;
 }
 .form-btn {
-   width: 120px;
+  width: 120px;
   padding: 10px;
   color: #ffffff;
   background-color: #003b66;
@@ -538,7 +554,7 @@ textarea {
     width: 100%;
   }
   .team {
- padding: 0;
+    padding: 0;
   }
   .section3 {
     padding: 15px;
@@ -549,11 +565,12 @@ textarea {
   .outreach {
     width: 100%;
   }
-  
+
   .about-img {
     width: 450px;
   }
-  .mis, .vis {
+  .mis,
+  .vis {
     width: 450px;
   }
   .mv {
@@ -583,208 +600,215 @@ textarea {
   }
   .main-text {
     width: 100%;
-  padding: 14px;
+    padding: 14px;
   }
- .text {
-  text-align: center;
- }
- .btn {
-  display:flex ;
-  align-items: center;
-  justify-content: center;
- }
+  .text {
+    text-align: center;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .section2-txt {
-  background-color: #faf9f6;
-  color: #2b2b2b;
-  width: 100%;
-  padding: 0px 10px 20px 10px;
-  
-} 
-.section2 {
-  display: flex;
- background-color: #faf9f6;
-  flex-direction: column;
-  margin-bottom: 300px;
-  gap: 0;
- 
-}
-.mission, .wwa, .wwd {
- margin: 30px;
- padding: 5px 20px 15px 15px;
- border-radius: 10px;
-}
-.team {
-  flex-wrap: wrap;
- padding: 30px;
- margin: 0 20px;
-}
-.team-card2, .team-card3 {
-  display: none;
-}
-.img3 {
-  display: none;
-  width: 100%;
-}
-.section-title {
-  font-size: 25px;
-  margin: auto;
-  text-align: center;
-}
-.event-hr{
-  margin: auto;
-}
-.name, .role {
-  text-align: center;
-}
-.events {
-  margin-top: 25px;
-}
-.events-grid {
-  margin: 20px 45px 20px 45px;
-}
-.menu {
-  display: none;
-}
-.menu-btn {
-  display: block;
-}
-.ask-convener {
-  margin: 20px 30px;
-  margin-top: 30px;
-  border-radius: 10px;
-  padding: 30px 45px 40px 45px;
-}
-.ask-convener h2 {
-  margin: 0 0 5px 0;
-}
-.see-more {
-  display:block;
-  margin-right: 0;
-  margin-left: 65%;
-}
-.event-card2 {
-  display: none;
-}
-.ask-convener p {
-  margin-bottom: 5px;
-}
-.footer-top {
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-.footer-btm {
-  flex-direction: column;
-  gap: 20px;
-}
-.footer-sect {
-  text-align: center;
-}
-.social-item {
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-.social-item p{
-  font-size: 15px;
-}
-.social-item a {
-   font-size: 15px;
-}
-.socials {
-  display: flex;
-}
-#menu {
-  flex-direction: column;
-  position: absolute;
-  top:  8%;
-  z-index: 1000;
-  background:#ffffff;
-  padding: 30px;
-  right: 0;
-  left: 50%;
- transform: translateY(-20px);
- opacity: 0;
- pointer-events: none;
- transition: transform 0.3s ease, opacity 0.3s ease;
-}
-#menu.active {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-#burger {
-  transition: 
-    opacity 0.15s ease,
-    transform 0.25s ease;
-}
+    background-color: #faf9f6;
+    color: #2b2b2b;
+    width: 100%;
+    padding: 0px 10px 20px 10px;
+  }
+  .section2 {
+    display: flex;
+    background-color: #faf9f6;
+    flex-direction: column;
+    margin-bottom: 300px;
+    gap: 0;
+  }
+  .mission,
+  .wwa,
+  .wwd {
+    margin: 30px;
+    padding: 5px 20px 15px 15px;
+    border-radius: 10px;
+  }
+  .team {
+    flex-wrap: wrap;
+    padding: 30px;
+    margin: 0 20px;
+  }
+  .team-card2,
+  .team-card3 {
+    display: none;
+  }
+  .img3 {
+    display: none;
+    width: 100%;
+  }
+  .section-title {
+    font-size: 25px;
+    margin: auto;
+    text-align: center;
+  }
+  .event-hr {
+    margin: auto;
+  }
+  .name,
+  .role {
+    text-align: center;
+  }
+  .events {
+    margin-top: 25px;
+  }
+  .events-grid {
+    margin: 20px 45px 20px 45px;
+  }
+  .menu {
+    display: none;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .ask-convener {
+    margin: 20px 30px;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 30px 45px 40px 45px;
+  }
+  .ask-convener h2 {
+    margin: 0 0 5px 0;
+  }
+  .see-more {
+    display: block;
+    margin-right: 0;
+    margin-left: 65%;
+  }
+  .event-card2 {
+    display: none;
+  }
+  .ask-convener p {
+    margin-bottom: 5px;
+  }
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-btm {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-sect {
+    text-align: center;
+  }
+  .social-item {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-item p {
+    font-size: 15px;
+  }
+  .social-item a {
+    font-size: 15px;
+  }
+  .socials {
+    display: flex;
+  }
+  #menu {
+    flex-direction: column;
+    position: absolute;
+    top: 8%;
+    z-index: 1000;
+    background: #ffffff;
+    padding: 30px;
+    right: 0;
+    left: 50%;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+  #menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #burger {
+    transition:
+      opacity 0.15s ease,
+      transform 0.25s ease;
+  }
 
-.about-main {
-  flex-direction: column;
-  width: 100%;
-  height: 670px;
-}
-.about-img {
-  width: 100%;
-}
-.wwd, .wwa {
-  padding: 30px;
-}
-.text1 {
-  line-height: 1.4;
-}
-.wwa p {
-  line-height: 1.5;
-}
-.mv {
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  gap: 30px;
-}
-.mis, .vis {
- margin-right: 35px;
- margin-left: 30px;
-  flex-wrap: wrap;
-  width: 93%;
-  padding: 30px;
-}
-.section3 {
-  margin-top: 30px;
-}
-nav {
-  padding: 10px 25px;
-}
-.contact-page {
-  padding: 20px 30px;
-}
-.answered {
-  flex-direction: column;
-}
-.paq {
-  font-size: 20px;
-}
-.qa-card {
-  width: 90%;
-}
-.qa-list {
-  margin: 5px;
-}
-.contact-cords {
-  padding: 20px 30px;
-}
-.coordinator {
-  flex-direction: column;
-}
-.team-card {
-  justify-content: center;
-}
-.cord-btn {
-  margin-left: 70px;
-}
-.past-events, .ongoing-events {
-  margin: 0;
-}
+  .about-main {
+    flex-direction: column;
+    width: 100%;
+    height: 670px;
+  }
+  .about-img {
+    width: 100%;
+  }
+  .wwd,
+  .wwa {
+    padding: 30px;
+  }
+  .text1 {
+    line-height: 1.4;
+  }
+  .wwa p {
+    line-height: 1.5;
+  }
+  .mv {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+  }
+  .mis,
+  .vis {
+    margin-right: 35px;
+    margin-left: 30px;
+    flex-wrap: wrap;
+    width: 93%;
+    padding: 30px;
+  }
+  .section3 {
+    margin-top: 30px;
+  }
+  nav {
+    padding: 10px 25px;
+  }
+  .contact-page {
+    padding: 20px 30px;
+  }
+  .answered {
+    flex-direction: column;
+  }
+  .paq {
+    font-size: 20px;
+  }
+  .qa-card {
+    width: 90%;
+  }
+  .qa-list {
+    margin: 5px;
+  }
+  .contact-cords {
+    padding: 20px 30px;
+  }
+  .coordinator {
+    flex-direction: column;
+  }
+  .team-card {
+    justify-content: center;
+  }
+  .cord-btn {
+    margin-left: 70px;
+  }
+  .past-events,
+  .ongoing-events {
+    margin: 0;
+  }
 }
