@@ -32,8 +32,8 @@ function initMenu() {
 
     setTimeout(() => {
       menuIcon.src = isOpen
-        ? "/public/bitimg/icon-close.svg"
-        : "/public/bitimg/icon-hamburger.svg";
+        ? "/bitimg/icon-close.svg"
+        : "/bitimg/icon-hamburger.svg";
 
       menuIcon.style.opacity = "1";
     }, 150);
@@ -230,7 +230,6 @@ if (logoutLink) {
     loginMessage.textContent = "";
   });
 }
-
 // ADMIN PANEL
 const adminContainer = document.getElementById("adminQuestions");
 

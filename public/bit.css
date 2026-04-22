@@ -202,6 +202,19 @@ a {
   padding: 20px 50px 45px 50px;
   background-color: #f2f4f6;
 }
+.mission,
+.ask-convener,
+.wwa,
+.wwd {
+  transform: translateX(-50px);
+  animation: SlideIn 1s ease forwards;
+}
+@keyframes SlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 .mis-head,
 .wwa-head {
   color: #0f2a44;
@@ -489,6 +502,9 @@ textarea {
   margin: auto;
   margin-top: 100px;
   border-radius: 10px;
+}
+.admin-logo {
+  margin: 15px;
 }
 #adminLoginBtn {
   width: 120px;
