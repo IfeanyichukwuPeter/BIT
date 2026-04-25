@@ -41,6 +41,22 @@ function initMenu() {
   });
 }
 
+const toggleBtn = document.getElementById("toggleAnswersBtn");
+const answersDiv = document.getElementById("answeredQuestions");
+
+// safety check (prevents errors if element not found)
+if (toggleBtn && answersDiv) {
+  toggleBtn.addEventListener("click", () => {
+    answersDiv.classList.toggle("hidden");
+
+    // change button text based on state
+    if (answersDiv.classList.contains("hidden")) {
+      toggleBtn.textContent = "See Answers";
+    } else {
+      toggleBtn.textContent = "Hide Answers";
+    }
+  });
+}
 // QUESTIONS ARRAY
 
 let questions = [];
