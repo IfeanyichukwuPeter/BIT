@@ -6,14 +6,7 @@
     "answer": "We start at 9:00 AM after first service. Check the events page for updates.",
     "status": "answered"
   },
-  {
-    "id": 1709000005000,
-    "name": "Anonymous",
-    "question": "Is there a registration fee?",
-    "answer": "yes, it is",
-    "status": "answered"
-  },
-  {
+    {
     "id": 1709000010000,
     "name": "Chidi",
     "question": "What ages can join?",
@@ -26,5 +19,12 @@
     "question": "How can I be a better soul?",
     "answer": "Serving the lord with all my heart",
     "status": "answered"
+  },
+  {
+    "id": 1776881605879,
+    "name": "Sarah",
+    "question": "How can i join this movement?",
+    "answer": "",
+    "status": "pending"
   }
 ]
