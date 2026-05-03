@@ -492,6 +492,7 @@ textarea {
 .programHeader {
   margin-left: 12px;
   margin-bottom: 15px;
+  text-align: center;
 }
 .main-panel {
   padding: 20px;
@@ -570,10 +571,13 @@ textarea {
     align-items: center;
   }
   .section2 {
-    height: 300px;
+    height: auto;
+  }
+  .section2-txt {
+    margin: 20px 20px;
   }
   .img2 {
-    width: 100%;
+    display: none;
   }
   .team {
     padding: 0;
@@ -585,11 +589,34 @@ textarea {
     flex-wrap: wrap;
   }
   .outreach {
-    width: 100%;
+    width: 300px;
   }
-
+  .event-card,
+  .event-card2 {
+    width: 300px;
+  }
+  .events-grid {
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .section-title {
+    text-align: center;
+  }
+  .event-hr {
+    margin: auto;
+  }
   .about-img {
     width: 450px;
+  }
+  .team-img {
+    width: 200px;
+  }
+  .team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px auto;
   }
   .mis,
   .vis {
@@ -642,7 +669,7 @@ textarea {
     display: flex;
     background-color: #faf9f6;
     flex-direction: column;
-    margin-bottom: 300px;
+    margin-bottom: 30px;
     gap: 0;
   }
   .mission,
@@ -654,8 +681,15 @@ textarea {
   }
   .team {
     flex-wrap: wrap;
-    padding: 30px;
-    margin: 0 20px;
+    margin: 20px auto;
+    padding: auto;
+    align-items: center;
+  }
+  .team-img{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .team-card2,
   .team-card3 {
@@ -681,7 +715,9 @@ textarea {
     margin-top: 25px;
   }
   .events-grid {
-    margin: 20px 45px 20px 45px;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
   }
   .menu {
     display: none;
