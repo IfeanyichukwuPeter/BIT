@@ -38,9 +38,9 @@
           <nav class="admin-nav">
             <a href="#mainPanel" class="active">Dashboard</a>
             <a href="#adminQuestions">Questions</a>
-          
+
             <a href="#eventSection">Events</a>
-            <a href="">Logout</a>
+            <a href="index.html">Logout</a>
           </nav>
         </aside>
         <main class="main-panel" id="mainPanel">
@@ -73,15 +73,19 @@
             <section class="event-form">
               <h2>Create/ Edit events</h2>
               <form action="" id="eventForm">
-                <input type="file" id="event-image" accept="image/*" />
+                <input type="file" id="eventImage" accept="image/*" />
                 <input
                   type="text"
                   name="event-title"
-                  id="event-title"
+                  id="eventTitle"
                   required
                   placeholder="Event title"
                 />
-                <input type="date" id="eventDate" required />
+                <label>Start Date</label>
+                <input type="date" id="eventStartDate" required />
+
+                <label>End Date</label>
+                <input type="date" id="eventEndDate" required />
                 <textarea
                   name="description"
                   id="eventDescription"

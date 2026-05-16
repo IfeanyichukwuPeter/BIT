@@ -1,5 +1,6 @@
 body {
   padding: 0;
+  overflow-x: hidden;
   padding-top: 57px;
   font-family: "Source Sans 3", sans-serif;
 }
@@ -684,8 +685,8 @@ textarea {
   .section2-txt {
     background-color: #faf9f6;
     color: #2b2b2b;
-    width: 100%;
-    padding: 0px 10px 20px 10px;
+    width: 90%;
+   
   }
   .section2 {
     display: flex;

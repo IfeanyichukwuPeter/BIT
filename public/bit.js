@@ -76,9 +76,9 @@ async function adminLogin(username, password) {
   const response = await fetch("/api/admin/login", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password }),
   });
 
   if (!response.ok) {
@@ -101,9 +101,9 @@ async function createQuestion(payload) {
   const response = await fetch("/api/questions", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   if (!response.ok) {
@@ -118,9 +118,9 @@ async function updateQuestion(id, payload) {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${adminToken}`
+      Authorization: `Bearer ${adminToken}`,
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   if (!response.ok) {
@@ -134,8 +134,8 @@ async function removeQuestion(id) {
   const response = await fetch(`/api/questions/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${adminToken}`
-    }
+      Authorization: `Bearer ${adminToken}`,
+    },
   });
 
   if (!response.ok) {
@@ -160,13 +160,15 @@ if (questionForm) {
     try {
       const newQuestion = await createQuestion({
         name,
-        question: questionText
+        question: questionText,
       });
 
       questions.push(newQuestion);
       questionForm.reset();
 
-      alert("Your question has been submitted! Answers will appear in the 'Answered Questions' section once answered.");
+      alert(
+        "Your question has been submitted! Answers will appear in the 'Answered Questions' section once answered.",
+      );
 
       renderAnswered();
       renderAdminQuestions();
@@ -182,8 +184,8 @@ function renderAnswered() {
   answeredContainer.innerHTML = "";
 
   questions
-    .filter(q => q.status === "answered")
-    .forEach(q => {
+    .filter((q) => q.status === "answered")
+    .forEach((q) => {
       const card = document.createElement("div");
       card.className = "qa-card";
 
@@ -197,7 +199,6 @@ function renderAnswered() {
 }
 
 // ADMIN PASSWORD LOGIN
-const ADMIN_PASSWORD = "BITadmin123";
 
 const loginContainer = document.getElementById("adminLogin");
 const adminSection = document.getElementById("adminSection");
@@ -254,7 +255,7 @@ function renderAdminQuestions() {
 
   adminContainer.innerHTML = "";
 
-  questions.forEach(q => {
+  questions.forEach((q) => {
     const card = document.createElement("div");
     card.className = "admin-q-card";
 
@@ -282,10 +283,12 @@ function renderAdminQuestions() {
 function attachReplyHandlers() {
   const buttons = adminContainer.querySelectorAll("button:not(.delete-btn)");
 
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-id");
-      const textarea = adminContainer.querySelector(`textarea[data-id="${id}"]`);
+      const textarea = adminContainer.querySelector(
+        `textarea[data-id="${id}"]`,
+      );
 
       const reply = textarea.value.trim();
       if (!reply) return alert("Type a reply before sending.");
@@ -293,7 +296,7 @@ function attachReplyHandlers() {
       updateQuestion(id, { answer: reply })
         .then((updated) => {
           questions = questions.map((item) =>
-            item.id == updated.id ? updated : item
+            item.id == updated.id ? updated : item,
           );
           renderAdminQuestions();
           renderAnswered();
@@ -308,16 +311,18 @@ function attachReplyHandlers() {
 function attachDeleteHandlers() {
   const deleteButtons = adminContainer.querySelectorAll(".delete-btn");
 
-  deleteButtons.forEach(btn => {
+  deleteButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-id");
 
-      const confirmDelete = confirm("Are you sure you want to delete this question?");
+      const confirmDelete = confirm(
+        "Are you sure you want to delete this question?",
+      );
       if (!confirmDelete) return;
 
       removeQuestion(id)
         .then(() => {
-          questions = questions.filter(q => q.id != id);
+          questions = questions.filter((q) => q.id != id);
           renderAdminQuestions();
           renderAnswered();
         })
@@ -337,17 +342,28 @@ loadQuestions()
     renderAnswered();
   });
 
-  //EVENTS
+//EVENTS
 
-  const eventForm = document.getElementById("eventForm");
+const eventForm = document.getElementById("eventForm");
 const adminEventsContainer = document.getElementById("adminEvents");
 
 const eventTitleInput = document.getElementById("eventTitle");
-const eventDateInput = document.getElementById("eventDate");
+const eventStartDateInput = document.getElementById("eventStartDate");
+
+const eventEndDateInput = document.getElementById("eventEndDate");
 const eventDescriptionInput = document.getElementById("eventDescription");
 const eventImageInput = document.getElementById("eventImage");
 
 let events = [];
+const pastEventsContainer = document.getElementById("pastEventsContainer");
+
+const ongoingEventsContainer = document.getElementById(
+  "ongoingEventsContainer",
+);
+
+const upcomingEventsContainer = document.getElementById(
+  "upcomingEventsContainer",
+);
 let editingEventId = null;
 
 async function loadEvents() {
@@ -358,6 +374,7 @@ async function loadEvents() {
 
     events = await res.json();
     renderEvents();
+    renderPublicEvents();
   } catch (err) {
     console.error(err);
   }
@@ -373,12 +390,19 @@ function renderEvents() {
     return;
   }
 
-  events.forEach(ev => {
+  events.forEach((ev) => {
     const div = document.createElement("div");
 
     div.innerHTML = `
       <h3>${ev.title}</h3>
-      <p>${ev.date || ""}</p>
+      <p>
+  ${
+    ev.startDate === ev.endDate
+      ? formatDate(ev.startDate)
+      : `${formatDate(ev.startDate)} - ${formatDate(ev.endDate)}`
+  }
+</p>
+      <p>Status: ${getEventStatus(ev)}</p>
       <button data-id="${ev.id}" class="edit-event">Edit</button>
       <button data-id="${ev.id}" class="delete-event">Delete</button>
       <hr>
@@ -393,11 +417,17 @@ function renderEvents() {
 if (eventForm) {
   eventForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const start = new Date(eventStartDateInput.value);
+    const end = new Date(eventEndDateInput.value);
 
+    if (end < start) {
+      return alert("End date cannot be before start date.");
+    }
     const formData = new FormData();
     formData.append("title", eventTitleInput.value);
-    formData.append("date", eventDateInput.value);
     formData.append("description", eventDescriptionInput.value);
+    formData.append("startDate", eventStartDateInput.value);
+    formData.append("endDate", eventEndDateInput.value);
 
     if (eventImageInput.files[0]) {
       formData.append("image", eventImageInput.files[0]);
@@ -415,9 +445,9 @@ if (eventForm) {
       const res = await fetch(url, {
         method,
         headers: {
-          Authorization: `Bearer ${adminToken}`
+          Authorization: `Bearer ${adminToken}`,
         },
-        body: formData
+        body: formData,
       });
 
       if (!res.ok) throw new Error("Failed to save event");
@@ -431,22 +461,104 @@ if (eventForm) {
     }
   });
 }
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString("en-NG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+function getEventStatus(ev) {
+  const now = new Date();
+
+  now.setHours(0, 0, 0, 0);
+
+  const start = new Date(ev.startDate);
+  const end = new Date(ev.endDate);
+
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
+
+  if (now < start) {
+    return "upcoming";
+  }
+
+  if (now >= start && now <= end) {
+    return "ongoing";
+  }
+
+  return "past";
+}
+
+function renderPublicEvents() {
+  if (
+    !pastEventsContainer ||
+    !ongoingEventsContainer ||
+    !upcomingEventsContainer
+  ) {
+    return;
+  }
+
+  pastEventsContainer.innerHTML = "";
+  ongoingEventsContainer.innerHTML = "";
+  upcomingEventsContainer.innerHTML = "";
+
+  events.forEach((ev) => {
+    const status = getEventStatus(ev);
+
+    const card = document.createElement("div");
+
+    card.classList.add("event-card");
+
+    card.innerHTML = `
+      <img src="${ev.image}" alt="${ev.title}" class="event-image">
+
+      <div class="event-content">
+
+        <h3>${ev.title}</h3>
+
+        <p>${ev.description}</p>
+
+        <p>${
+    ev.startDate === ev.endDate
+      ? formatDate(ev.startDate)
+      : `${formatDate(ev.startDate)} - ${formatDate(ev.endDate)}`
+  }
+</p>
+
+      </div>
+    `;
+
+    if (status === "past") {
+      pastEventsContainer.appendChild(card);
+    }
+
+    if (status === "ongoing") {
+      ongoingEventsContainer.appendChild(card);
+    }
+
+    if (status === "upcoming") {
+      upcomingEventsContainer.appendChild(card);
+    }
+  });
+}
 
 function attachEventActions() {
-  document.querySelectorAll(".edit-event").forEach(btn => {
+  document.querySelectorAll(".edit-event").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
-      const ev = events.find(e => e.id == id);
+      const ev = events.find((e) => e.id == id);
 
       editingEventId = id;
 
       eventTitleInput.value = ev.title || "";
-      eventDateInput.value = ev.date || "";
+      eventStartDateInput.value = ev.startDate || "";
+      eventEndDateInput.value = ev.endDate || "";
       eventDescriptionInput.value = ev.description || "";
     });
   });
 
-  document.querySelectorAll(".delete-event").forEach(btn => {
+  document.querySelectorAll(".delete-event").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = btn.dataset.id;
 
@@ -457,8 +569,8 @@ function attachEventActions() {
         const res = await fetch(`/api/events/${id}`, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${adminToken}`
-          }
+            Authorization: `Bearer ${adminToken}`,
+          },
         });
 
         if (!res.ok) throw new Error();
@@ -470,5 +582,8 @@ function attachEventActions() {
     });
   });
 }
-
+if (adminToken && loginContainer && adminSection) {
+  loginContainer.style.display = "none";
+  adminSection.style.display = "block";
+}
 loadEvents();
