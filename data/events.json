@@ -1,18 +1,10 @@
 [
   {
-    "id": 1778960964360,
-    "title": "The lords havest",
-    "description": "The test of an event",
-    "startDate": "2001-11-18",
-    "endDate": "2002-11-18",
-    "image": "/uploads/event-1778960964360-Screenshot From 2026-05-11 21-35-29.png"
-  },
-  {
-    "id": 1779188102360,
-    "title": "Testing the events",
-    "description": "a nice test",
-    "startDate": "2026-05-19",
-    "endDate": "2026-05-21",
-    "image": "/uploads/event-1779188319892-instagram templates.jpeg"
+    "id": 1778965391374,
+    "title": "BIT'24 - From Child To King",
+    "description": "A growth-focused program helping children discover their identity in Christ, and step into spiritual maturity.",
+    "startDate": "2024-10-26",
+    "endDate": "2024-10-26",
+    "image": "/uploads/event-1778965391371-bit'24.jpg"
   }
 ]

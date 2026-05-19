@@ -515,11 +515,11 @@ function renderPublicEvents() {
 
       <div class="event-content">
 
-        <h3>${ev.title}</h3>
+        <h3 class="event-title">${ev.title}</h3>
 
-        <p>${ev.description}</p>
+        <p class="event-description">${ev.description}</p>
 
-        <p>${
+        <p class= "event-date">${
     ev.startDate === ev.endDate
       ? formatDate(ev.startDate)
       : `${formatDate(ev.startDate)} - ${formatDate(ev.endDate)}`
