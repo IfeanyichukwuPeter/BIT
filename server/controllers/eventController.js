@@ -22,7 +22,7 @@ function createEvent(req, res) {
     let imagePath = "/bitimg/default-event.jpg"; // default image
     
     if (req.file) {
-      const uploadsDir = path.join(__dirname, "..", "..", "public", "uploads");
+      const uploadsDir = path.join(__dirname, "..", "..", "public_html", "public", "uploads");
       if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
       }
@@ -70,7 +70,7 @@ function updateEvent(req, res) {
 
     // Handle image upload
     if (req.file) {
-      const uploadsDir = path.join(__dirname, "..", "..", "public", "uploads");
+      const uploadsDir = path.join(__dirname, "..", "..", "public_html", "uploads");
       if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
       }
