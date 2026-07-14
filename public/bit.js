@@ -260,17 +260,22 @@ function renderAdminQuestions() {
     card.className = "admin-q-card";
 
     card.innerHTML = `
-      <p><strong>Name:</strong> ${q.name}</p>
-      <p><strong>Question:</strong> ${q.question}</p>
+      <div class="q-card-header">
+        <span class="q-name"><i class="fa-solid fa-user"></i> ${q.name}</span>
+        <span class="q-status ${q.status === 'answered' ? 'status-answered' : 'status-pending'}">${q.status.toUpperCase()}</span>
+      </div>
+      <p class="q-text"><strong>Q:</strong> ${q.question}</p>
       ${
         q.status === "answered"
-          ? `<p><strong>Answer:</strong> ${q.answer}</p>`
-          : `<textarea data-id="${q.id}" placeholder="Type reply...">${q.answer}</textarea>
-             <button data-id="${q.id}">Send Reply</button>
-             <button class="delete-btn" data-id="${q.id}">Delete</button>`
+          ? `<div class="q-answer-box"><p><strong>A:</strong> ${q.answer}</p></div>`
+          : `<div class="q-action-box">
+               <textarea data-id="${q.id}" placeholder="Type your reply here...">${q.answer}</textarea>
+               <div class="q-actions">
+                 <button class="reply-btn" data-id="${q.id}">Send Reply</button>
+                 <button class="delete-btn" data-id="${q.id}">Delete</button>
+               </div>
+             </div>`
       }
-      <p>Status: ${q.status}</p>
-      <hr>
     `;
 
     adminContainer.appendChild(card);
@@ -393,19 +398,24 @@ function renderEvents() {
   events.forEach((ev) => {
     const div = document.createElement("div");
 
+    div.className = "admin-event-card";
     div.innerHTML = `
-      <h3>${ev.title}</h3>
-      <p>
-  ${
-    ev.startDate === ev.endDate
-      ? formatDate(ev.startDate)
-      : `${formatDate(ev.startDate)} - ${formatDate(ev.endDate)}`
-  }
-</p>
-      <p>Status: ${getEventStatus(ev)}</p>
-      <button data-id="${ev.id}" class="edit-event">Edit</button>
-      <button data-id="${ev.id}" class="delete-event">Delete</button>
-      <hr>
+      <div class="event-card-header">
+        <h3>${ev.title}</h3>
+        <span class="event-status status-${getEventStatus(ev)}">${getEventStatus(ev).toUpperCase()}</span>
+      </div>
+      <p class="event-dates">
+        <i class="fa-regular fa-calendar"></i>
+        ${
+          ev.startDate === ev.endDate
+            ? formatDate(ev.startDate)
+            : `${formatDate(ev.startDate)} - ${formatDate(ev.endDate)}`
+        }
+      </p>
+      <div class="event-actions">
+        <button data-id="${ev.id}" class="edit-event"><i class="fa-solid fa-pen"></i> Edit</button>
+        <button data-id="${ev.id}" class="delete-event"><i class="fa-solid fa-trash"></i> Delete</button>
+      </div>
     `;
 
     adminEventsContainer.appendChild(div);
