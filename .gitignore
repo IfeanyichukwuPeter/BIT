@@ -1,5 +1,16 @@
-node_modules
-coverage
+# OS generated files
 .DS_Store
+
+# Log files
 *.log
+
+# SQLite Database
+data/*.sqlite
+data/*.db
+
+# Uploads directory contents
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Environment files
 .env

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.2-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/html
+      - ./data:/var/www/data
+    environment:
+      - DATA_DIR=/var/www/data
+    command: >
+      bash -c "a2enmod rewrite && chown -R www-data:www-data /var/www/data /var/www/html/uploads && apache2-foreground"
